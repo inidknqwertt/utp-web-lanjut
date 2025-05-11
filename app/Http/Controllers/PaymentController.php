@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Payment;
+use App\Models\Enrollment;
 
 class PaymentController extends Controller
 {
@@ -12,7 +13,7 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        $payments = Course::all();
+        $payments = Payment::all();
         return view ('payments.index')->with('payments', $payments);
     }
 
@@ -21,8 +22,8 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        $payments = Payment::pluck('enroll_no', 'id');
-        return view('payments.create', compact('payments'));
+        $enrollments = Enrollment::pluck('enroll_no', 'id');
+        return view('payments.create', compact('enrollments'));
     }
 
     /**
@@ -30,10 +31,21 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
-        Payment::create($input);
-        return redirect('payments')->with('flash_message', 'Payment Addedd!');
+    $request->validate([
+        'enrollment_id' => 'required|exists:enrollments,id',
+        'paid_date' => 'required|date',
+        'amount' => 'required|numeric',
+    ]);
+
+    Payment::create([
+        'enrollment_id' => $request->enrollment_id,
+        'paid_date' => $request->paid_date,
+        'amount' => $request->amount,
+    ]);
+
+    return redirect('payments')->with('flash_message', 'Payment Added!');
     }
+
 
     /**
      * Display the specified resource.
@@ -50,7 +62,8 @@ class PaymentController extends Controller
     public function edit(string $id)
     {
         $payments = Payment::find($id);
-        return view('payments.edit')->with('payments', $payments);
+        $enrollments = Enrollment::pluck('enroll_no', 'id');
+        return view('payments.edit', compact('payments','enrollments'));
     }
 
     /**
