@@ -18,7 +18,6 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
                                         <th>Enroll no</th>
                                         <th>Batch</th>
                                         <th>Student</th>
@@ -31,7 +30,6 @@
                                     @foreach($enrollments as $item)
     <tr>
         <td>{{ $loop->iteration }}</td>
-        <td>{{ $item->name }}</td> <!-- TAMBAHKAN INI -->
         <td>{{ $item->enroll_no }}</td>
         <td>{{ $item->batch->name}}</td>
         <td>{{ $item->student->name }}</td>

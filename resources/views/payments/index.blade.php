@@ -18,7 +18,8 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Enrollment No</th>
+                                        <th>Enroll no</th>
+                                        <th>Name</th>
                                         <th>Paid Date</th>
                                         <th>Amount</th>
                                         <th>Actions</th>
@@ -29,6 +30,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->enrollment->enroll_no }}</td>
+                                        <td>{{ $item->paid_date }}</td>
                                         <td>{{ $item->paid_date }}</td>
                                         <td>{{ $item->amount }}</td>
  
@@ -41,6 +43,7 @@
                                                 {{ csrf_field() }}
                                                 <button type="submit" class="btn btn-danger btn-sm" title="Delete ayments" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                                             </form>
+                                            <a href="{{url('report.payment', $item->id) }}" class="btn btn-success"><i class="fa fa-print"></i> Print</a>
                                         </td>
                                     </tr>
                                 @endforeach
