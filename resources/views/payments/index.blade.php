@@ -18,8 +18,7 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Enroll no</th>
-                                        <th>Name</th>
+                                        <th>Enrollment No</th>
                                         <th>Paid Date</th>
                                         <th>Amount</th>
                                         <th>Actions</th>
@@ -27,10 +26,9 @@
                                 </thead>
                                 <tbody>
                                 @foreach($payments as $item)
-                                    <tr>
+                                    <tr>  
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->enrollment->enroll_no }}</td>
-                                        <td>{{ $item->paid_date }}</td>
                                         <td>{{ $item->paid_date }}</td>
                                         <td>{{ $item->amount }}</td>
  
@@ -41,9 +39,9 @@
                                             <form method="POST" action="{{ url('/payments' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete ayments" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Payments" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                                             </form>
-                                            <a href="{{url('report.payment', $item->id) }}" class="btn btn-success"><i class="fa fa-print"></i> Print</a>
+                                            <a href="{{ url('/report/report1/' . $item->id ) }}" title="Edit Payment"><button class="btn btn-success"><i class="fa fa-print" aria-hidden="true"></i>Print</button></a>
                                         </td>
                                     </tr>
                                 @endforeach

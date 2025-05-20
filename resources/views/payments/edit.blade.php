@@ -15,7 +15,7 @@
             @foreach($payments as $id => $enrollno)
               <option value="{{ $id }}">{{ $enrollno }}</option>
             @endforeach
-      </select>br>
+      </select><br>
 
         <label>Paid Date</label></br>
         <input type="text" name="paid_date" id="paid_date" value="{{$payments->paid_date}}" class="form-control"></br>
